@@ -2,8 +2,8 @@ use std::path::Path;
 use std::io::prelude::*;
 
 enum OperationMode {
-    toml2json,
-    json2toml,
+    Toml2Json,
+    Json2Toml,
 }
 
 fn main() -> Result<(), std::io::Error> {
@@ -21,8 +21,8 @@ fn main() -> Result<(), std::io::Error> {
     };
 
     let mode = match name.unwrap().to_str() {
-        Some("toml2json") => OperationMode::toml2json,
-        Some("json2toml") => OperationMode::json2toml,
+        Some("toml2json") => OperationMode::Toml2Json,
+        Some("json2toml") => OperationMode::Json2Toml,
         _ => {
             eprintln!("Unsupported operating mode!");
             std::process::exit(1);
@@ -40,8 +40,8 @@ fn main() -> Result<(), std::io::Error> {
     }
 
     let result = match mode {
-        OperationMode::toml2json => toml2json(&all_lines),
-        OperationMode::json2toml => json2toml(&all_lines),
+        OperationMode::Toml2Json => toml2json(&all_lines),
+        OperationMode::Json2Toml => json2toml(&all_lines),
     };
 
     println!("{}", result);
